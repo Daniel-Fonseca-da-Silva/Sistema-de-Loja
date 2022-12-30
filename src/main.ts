@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -12,5 +13,6 @@ async function bootstrap() {
     })
   );
   await app.listen(3000);
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 }
 bootstrap();
